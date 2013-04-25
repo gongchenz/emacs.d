@@ -1,0 +1,21 @@
+(require 'emms-setup)
+(emms-standard)
+(emms-default-players)
+
+(global-set-key (kbd "M-p") 'emms-pause)
+(global-set-key (kbd "M-=") 'emms-seek-forward)
+(global-set-key (kbd "M--") 'emms-seek-backward)
+
+;; Show the current track each time EMMS
+;; starts to play a track with "NP : "
+(add-hook 'emms-player-started-hook 'emms-show)
+(setq emms-show-format "NP: %s")
+;; When asked for emms-play-directory,
+;; always start from this one
+(if (not (file-exists-p (expand-file-name "~/.emacs.d/emms")))
+  (make-directory (expand-file-name "~/.emacs.d/emms"))
+  )
+(setq emms-source-file-default-directory "~/Music/")
+
+
+(provide 'init-emms)
